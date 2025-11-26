@@ -35,7 +35,7 @@ env/
 .env.local
 .env.*.local
 
-# API Cache
+# API Cache (temporär, nicht committen)
 cache/
 *.cache
 
@@ -44,8 +44,13 @@ cache/
 *.pem
 secrets/
 *.pkl
-*.keras
-*.h5
+
+# Models (zu groß für Git)
+models/*.keras
+models/*.h5
+models/*.pkl
+checkpoints/
+tensorboard_logs/
 
 # IDE
 .vscode/
@@ -62,12 +67,16 @@ Thumbs.db
 *.log
 logs/
 
-# Data (large files)
-*.csv
+# Data Files - HYBRID STRATEGIE
+# Rohdaten committen (klein genug)
+!data/retail_store_inventory.csv
+
+# Feature CSVs committen wenn < 10 MB (Snapshots für Training)
+!data/external_features_*.csv
+!data/training_dataset_*.csv
+
+# Große Daten nicht committen
 *.parquet
 *.feather
-
-# Model artifacts
-models/
-checkpoints/
-tensorboard_logs/
+data/*.parquet
+data/*.feather
